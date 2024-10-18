@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while read local_ref local_sha remote_ref remote_sha
+while read local_ref local_sha remote_ref remote_sha; do
     if [[ "$remote_ref" =~ refs/heads/(main|master|staging)$ ]]; then
         echo "Running ruff check for $remote_ref"
         ruff check --exit-non-zero-on-fix
@@ -15,7 +15,6 @@ while read local_ref local_sha remote_ref remote_sha
         echo "No linting for branch $remote_ref"
         continue
     fi
-
 done
 
 exit 0
