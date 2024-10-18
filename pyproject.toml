@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "[project]"
+version = "0.1.0"
+description = ""
+authors = ["Kasper <dkkasjoe@hotmail.com>"]
+readme = "README.md"
+package-mode = false                        # set to `true` if project is a package
+
+[tool.poetry.dependencies]
+python = "^3.13"
+polars = "^1.9.0"
+ruff = "^0.7.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
