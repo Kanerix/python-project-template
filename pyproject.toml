@@ -9,13 +9,13 @@ package-mode = false                        # set to `true` if project is a pack
 [tool.poetry.dependencies]
 python = "^3.13"
 polars = "^1.9.0"
-ruff = "^0.7.0"
+ipykernel = "*"
 
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-ipykernel = "*"
+ruff = "*"
 
 [build-system]
 requires = ["poetry-core"]
