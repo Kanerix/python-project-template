@@ -1,4 +1,4 @@
-"""Template docstring.
+"""Main module.
 
 This module contains code that create and prints a polars DataFrame.
 """
@@ -6,7 +6,7 @@ This module contains code that create and prints a polars DataFrame.
 import polars as pl
 
 
-def hello_polars(name: str) -> pl.DataFrame:
+def hello_polars(name: str, age: int) -> pl.DataFrame:
     """Create and returns a DataFrame.
 
     Returns
@@ -16,10 +16,11 @@ def hello_polars(name: str) -> pl.DataFrame:
 
     """
     first_name = name.split(" ")[0]
+
     data = [
         {
             "name": first_name,
-            "age": 21,
+            "age": age,
         },
     ]
 
@@ -29,4 +30,4 @@ def hello_polars(name: str) -> pl.DataFrame:
 
 
 if __name__ == "__main__":
-    print(hello_polars("Kasper"))
+    print(hello_polars("Kasper", 21))
