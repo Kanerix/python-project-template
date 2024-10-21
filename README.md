@@ -19,7 +19,7 @@ Prerequisites:
 
 Start off by giving the project a name. The name should be set in these places:
 
-- [`[package]`](/[package]/): Change folder name.
+- [`package`](package): Change folder name.
 - [`pyproject.toml`](pyproject.toml#L2): Change to project name.
 
 First you have to active your environment:
