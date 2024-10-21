@@ -56,7 +56,7 @@ Poetry is the tool used to manage dependencies. Poetry creates a dependency lock
 that the same version of dependencies will be used for every install. Poetry also has other powerful features like
 dependency groups which is explained below.
 
-### Installing dependencies
+#### Installing dependencies
 
 You can install dependencies using `Poetry` with the following command:
 
@@ -75,7 +75,7 @@ $ poetry install --with dev
 Installing dependencies from lock file
 ```
 
-### Adding dependencies
+#### Adding dependencies
 
 To add new dependencies using Poetry, you can use the following command:
 
@@ -124,12 +124,20 @@ $ ruff linter
 
 These linter can be added to the [ruff.toml](ruff.toml) file.
 
-### Linting you code
+#### Linting your code
 
 Linting your code with Ruff is very easy. You just need to run the command below.
 
 ```shell
 $ ruff check
+...
+Found 1 error.
+```
+
+You can also use the `--fix` flag to fix all autofixable issues.
+
+```shell
+$ ruff check --fix
 ...
 Found 1 error.
 ```
