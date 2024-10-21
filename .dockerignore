@@ -5,15 +5,16 @@
 
 # VS Code
 .ruff_cache
-.vscdoe
+.vscode
 
 # Tests
 tests
 
-# Config files
-ruff.toml
+# Docker
+.dockerignore
 Dockerfile
 
 # Other
 CHANGELOG.md
 README.md
+ruff.toml

@@ -1,42 +1,39 @@
 # Create a base image with updated and shared dependecies installed.
 #
 # The python version here does not acctually matter since it will be
-# overriden by `poetry`.
-FROM python:alpine3.20 AS base
+# overriden by `poetry` when creating a virtual environment.
+FROM python:slim AS base
 WORKDIR /app
 
-RUN apk update && sudo apk upgrade --no-cache \
-    apk add pipx
+RUN apt-get update && apt-get upgrade -y && apt-get clean
+RUN apt-get install pipx -y --no-install-recommends
 
+# Equivalent to `pipx ensurepath`.
+ENV PATH="/root/.local/bin:$PATH"
 RUN pipx install poetry
 
 
-# Build dependencies in independant step so we only rebuild when
-# they changes (dependency caching).
-FROM base AS depedency
+FROM base AS builder
 WORKDIR /app
 
 ADD pyproject.toml poetry.lock ./
 
-RUN poetry install
+RUN poetry config virtualenvs.in-project true && \
+    poetry install --no-interaction --no-ansi -vvv
 
 
-# Build application
-FROM base AS builder
+FROM base AS runner
 WORKDIR /app
 
+COPY --from=builder /app/.venv ./.venv
 ADD . .
 
+RUN groupadd app && \
+    useradd -d /var/app -g app app-data && \
+    chown -R app-data:app /app
 
-FROM python:alpine3.20 AS runner
-WORKDIR /var/app
+USER app-data
 
-RUN addgroup -S app && \
-    adduser -S dae -G app && \
-    chown -R dae:app /var/app
+# EXPOSE 3000 <-- Only expose if necessary
 
-USER dae
-
-# EXPOSE 3000 <-- Only expose ports if necessary
-
-ENTRYPOINT ["python", "/var/app/"]
+ENTRYPOINT [".venv/bin/python3", "[package]/main.py"]
