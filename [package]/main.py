@@ -1,22 +1,24 @@
 """Template docstring.
 
-The purpose of this code it to print "Hello, World"
+This module contains code that create and prints a polars DataFrame.
 """
 
 import polars as pl
 
 
-def hello_polars() -> pl.DataFrame:
+def hello_polars(name: str) -> pl.DataFrame:
     """Create and returns a DataFrame.
 
-    Returns:
-        pl.DataFrame:
+    Returns
+    -------
+    pl.DataFrame:
             A DataFrame
 
     """
+    first_name = name.split(" ")[0]
     data = [
         {
-            "name": "Kasper",
+            "name": first_name,
             "age": 21,
         },
     ]
@@ -27,4 +29,4 @@ def hello_polars() -> pl.DataFrame:
 
 
 if __name__ == "__main__":
-    print("Hello, World!")
+    print(hello_polars("Kasper"))
