@@ -19,7 +19,8 @@ WORKDIR /app
 ADD pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.in-project true && \
-    poetry install --no-interaction --no-ansi -vvv
+    poetry lock --no-interaction --no-ansi -vvv --no-update && \
+    poetry install --no-interaction --no-ansi -vvv --only main
 
 
 FROM base AS runner
