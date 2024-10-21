@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "[package]"
+name = "package"
 version = "0.1.0"
 description = ""
 authors = ["Kasper <dkkasjoe@hotmail.com>"]
@@ -7,15 +7,15 @@ readme = "README.md"
 package-mode = false                        # set to `true` if project is a package
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.11"
 polars = "^1.10.0"
-
-[tool.poetry.group.dev]
-optional = true
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "*"
 ruff = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "*"
 
 [build-system]
 requires = ["poetry-core"]
