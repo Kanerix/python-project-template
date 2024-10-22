@@ -1,6 +1,8 @@
 # python-project-template
 
-My template for Python3 projects
+My template for Python3 projects.
+
+**INFO:** In the future this template will use UV when the tool is more developed.
 
 ## Features
 
