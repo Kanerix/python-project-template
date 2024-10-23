@@ -1,22 +1,20 @@
-[tool.poetry]
-name = "package"
+[project]
+name = "python-project-template"
 version = "0.1.0"
-description = ""
-authors = ["Kasper <dkkasjoe@hotmail.com>"]
+description = "Add your description here"
 readme = "README.md"
-package-mode = false                        # set to `true` if project is a package
+requires-python = ">=3.13"
+dependencies = [
+    "polars>=1.10.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-polars = "^1.10.0"
+[project.optional-dependencies]
+test = [
+    "pytest>=8.3.3",
+]
 
-[tool.poetry.group.dev.dependencies]
-ipykernel = "*"
-ruff = "*"
-
-[tool.poetry.group.test.dependencies]
-pytest = "*"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "ipykernel>=6.29.5",
+    "ruff>=0.7.0",
+]
