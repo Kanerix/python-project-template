@@ -17,7 +17,7 @@ My template for Python3 projects.
 
 Prerequisites:
 
-- [Poetry](https://python-poetry.org/docs/#installation)
+- [uv](https://docs.astral.sh/uv/)
 
 Start off by giving the project a name. The name should be set in these places:
 
@@ -25,76 +25,101 @@ Start off by giving the project a name. The name should be set in these places:
 - [`pyproject.toml`](pyproject.toml#L2): Change to project name.
 - [`Dockerfile`](Dockerfile#L999): Change Dockerfile entrypoint.
 
-First you have to active your environment:
+First you have to make sure your environment is activate.
 
 ```shell
-poetry shell
+. .venv/bin/actiavte
 ```
 
-That's it. Now install missing dependencies for local development:
+That's it. Now sync missing dependencies for the environment.
 
 ```shell
-$ poetry install --with dev
+$ uv sync
 Installing dependencies from lock file
 ```
 
 Now you are ready to start developing!
 
-**NOTE:** If you have issues like missing dependencies, you might have to select the Poetry interpreter.
+**NOTE:** If you have issues like missing dependencies, you might have to select the right interpreter.
 You can do this by opening the VSCode command pallette (`F1`) and search for `Python: Select interpreter`.
-Then locate the poetry interpreter for your project (it will say `Poetry` or `Recommended`). The name of
+Then locate the `.venv` interpreter for your project (it will say `Venv` or `Recommended`). The name of
 the interpreter should look something like this:
 
 ```text
-Python 3.13.0 ('[package]-DncAA2aN-py3.13': Poetry)
+Python 3.13.0 ('.venv': venv)
 ```
 
 ## Tools
 
-### Poetry
+### Uv
 
-This section is referenced from the [Poetry documentation](https://python-poetry.org/docs/).
+This section is referenced from the [uv documentation](https://docs.astral.sh/uv/).
 
-Poetry is the tool used to manage dependencies. Poetry creates a dependency lock file. This will make sure
-that the same version of dependencies will be used for every install. Poetry also has other powerful features like
-dependency groups which is explained below.
+The `uv` CLI is an extremely fast tool used to manage projects and packages. It creates a dependency lock file
+that will make sure the same version of packages will be used everytime they are installed. It also manages your
+python version for you using the [`.python-version`](.python-version) file.
 
-#### Installing dependencies
+#### Dependencies
 
-You can install dependencies using `Poetry` with the following command:
+You can sync dependencies using `uv` with the following command. This will make sure that only the packages you
+wan't will be available in the environment
 
 ```shell
-$ poetry install
-Installing dependencies from lock file
+$ uv sync
+Resolved 40 packages in 11ms
+Audited 32 packages in 0.20ms
 ```
 
-You can also use [Poetry dependency groups](https://python-poetry.org/docs/managing-dependencies/)
-to create groups, not required for running the application (test, dev, etc..). In this template there is
-a group called `dev` used to install dependencies required for development only. Install these dependencies
-with the following command.
+You can also install only packages required for the application to run. This will also remove dev-dependencies
+as well as optional dependencies if they are installed.
 
-```shell
-$ poetry install --with dev
-Installing dependencies from lock file
+<!-- TODO: Find the right command (https://docs.astral.sh/uv/concepts/dependencies/#optional-dependencies) -->
+
+```bash
+$ uv sync --no-dev
+Resolved 8 packages in 5ms
+Audited 2 packages in 0.20ms
+```
+
+Install dependencies with extra optional groups (e.g. lint, docs...).
+
+```bash
+$ uv sync --group lint
+Resolved 8 packages in 176ms
+Audited 2 packages in 0.17ms
 ```
 
 #### Adding dependencies
 
-To add new dependencies using Poetry, you can use the following command:
+To add new dependencies using `uv`, you can use the following command:
 
 ```shell
-$ poetry add prefect
-Using version ^3.0.10 for prefect
+$ uv add prefect
+Resolved 121 packages in 637ms
+Prepared 82 packages in 796ms
+Installed 84 packages in 148ms
 
-$ poetry add prefect==2.18.3
-Using version ^2.18.3 for prefect
+$ uv add prefect==2.18.3
+Resolved 125 packages in 378ms
+Prepared 19 packages in 1.63s
+Uninstalled 7 packages in 104ms
+Installed 19 packages in 34ms
 ```
 
-If you wan't to add them to a specif group you can use the flag `--group <group>`.
+Add packages only used for development.
 
 ```shell
-$ poetry add ipykernel --group dev
-Using version * for ipykernel 
+$ uv add pytest --dev
+Resolved 8 packages in 4ms
+Installed 4 packages in 12ms
+```
+
+Add packages to optional extras.
+
+```bash
+$ uv add ruff --group lint
+Resolved 8 packages in 4ms
+Audited 2 packages in 0.49ms
 ```
 
 ### Updating dependencies
@@ -102,7 +127,7 @@ Using version * for ipykernel
 To update dependencies, it is very simple. Just run the following command.
 
 ```shell
-$ poetry update
+$ uv lock --upgrade
 Updating dependencies
 ```
 

@@ -24,16 +24,12 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev -v
 
+RUN cp $(which python) /app/.venv/bin/python
+
 
 FROM python:slim-bookworm AS runner
 COPY --from=builder --chown=app:app /app /app
 
 ENV PATH="/app/.venv/bin:$PATH"
-
-RUN groupadd app && \
-    useradd --no-log-init -r -g app app-data && \
-    chown -R app-data:app /app
-
-USER app-data
 
 ENTRYPOINT ["python3", "package/main.py"]
