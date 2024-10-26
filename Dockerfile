@@ -2,7 +2,7 @@
 #
 # The python version here does not acctually matter since it will
 # be overriden by `uv` when creating a virtual environment.
-FROM python AS builder
+FROM python:slim-bookworm AS builder
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
@@ -24,12 +24,8 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev -v
 
-RUN cp $(which python) /app/.venv/bin/python
-
-
-FROM python:slim-bookworm AS runner
-COPY --from=builder --chown=app:app /app /app
-
 ENV PATH="/app/.venv/bin:$PATH"
+
+RUN . .venv/bin/activate
 
 ENTRYPOINT ["python3", "package/main.py"]
