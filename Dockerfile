@@ -26,6 +26,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-RUN . .venv/bin/activate
-
 ENTRYPOINT ["python3", "package/main.py"]
