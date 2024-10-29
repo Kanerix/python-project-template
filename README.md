@@ -2,8 +2,6 @@
 
 My template for Python3 projects.
 
-**INFO:** In the future this template will use UV when the tool is more developed.
-
 ## Features
 
 - Proper Python type checking
