@@ -12,7 +12,7 @@ def hello_polars(name: str, age: int) -> pl.DataFrame:
     Returns
     -------
     pl.DataFrame:
-            A DataFrame
+        A DataFrame containing name and age.
 
     """
     first_name = name.split(" ")[0]
