@@ -1,4 +1,5 @@
-"""Main module.
+"""
+Main module.
 
 This module contains code that create and prints a polars DataFrame.
 """
@@ -7,7 +8,8 @@ import polars as pl
 
 
 def hello_polars(name: str, age: int) -> pl.DataFrame:
-    """Create and returns a DataFrame.
+    """
+    Create and returns a DataFrame.
 
     Returns
     -------
