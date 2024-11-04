@@ -1,5 +1,3 @@
-# Builder layer with updated and shared dependecies installed.
-#
 # The python version here does not acctually matter since it will
 # be overriden by `uv` when creating a virtual environment.
 FROM python:slim-bookworm
