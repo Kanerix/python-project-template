@@ -20,3 +20,6 @@ dev = [
 lint = [
     "ruff>=0.7.0",
 ]
+docs = [
+    "mkdocs-material>=9.5.43",
+]
