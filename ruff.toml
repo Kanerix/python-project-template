@@ -1,4 +1,5 @@
 [lint]
-preview = true
-select = ["PL", "UP", "E", "D", "DOC"]
-ignore = ["D212", "D203"]
+select = ["PL", "UP", "D"]
+
+[lint.pydocstyle]
+convention = "google"
